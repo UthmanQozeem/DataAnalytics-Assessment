@@ -11,12 +11,12 @@ This repository contains SQL scripts details I developed to answer a set of anal
 **Goal**: Identify customers with at least one funded savings plan and one funded investment plan, and sort them by total deposits.
 
 **Approach**:
-- Joined `users_customuser`, `savings_savingsaccount`, and `plans_plan` using `owner_id`
-- Filtered savings accounts with `confirmed_amount > 0`
-- Filtered plans with `is_a_fund = 1` for investments
-- Grouped results by user and counted each plan type
-- Aggregated `confirmed_amount` to calculate deposits
-- Sorted by `total_deposits`
+-I Joined `users_customuser`, `savings_savingsaccount`, and `plans_plan` using `owner_id`
+-I Filtered savings accounts with `confirmed_amount > 0`
+-I Filtered plans with `is_a_fund = 1` for investments
+-I Grouped results by user and counted each plan type
+-I Aggregated `confirmed_amount` to calculate deposits
+-I Sorted by `total_deposits`
 
 ---
 
@@ -25,10 +25,10 @@ This repository contains SQL scripts details I developed to answer a set of anal
 **Goal**: Classify customers as High, Medium, or Low frequency users based on average monthly transactions.
 
 **Approach**:
-- Counted all transactions per customer
-- Calculated the active period in months using `transaction_date`
-- Categorized frequency based on thresholds (≥10, 3–9, ≤2)
-- Grouped by frequency category to get average and count
+-I Counted all transactions per customer
+-I Calculated the active period in months using `transaction_date`
+-I Categorized frequency based on thresholds (≥10, 3–9, ≤2)
+-I Grouped by frequency category to get average and count
 
 ---
 
@@ -37,10 +37,10 @@ This repository contains SQL scripts details I developed to answer a set of anal
 **Goal**: Identify savings or investment plans with no transactions in the past 365 days.
 
 **Approach**:
-- Joined `plans_plan` and `savings_savingsaccount` via `plan_id`
-- Retrieved latest `transaction_date` per plan
-- Calculated the number of inactive days using `DATEDIFF`
-- Filtered those with more than 365 days of inactivity
+-I Joined `plans_plan` and `savings_savingsaccount` via `plan_id`
+-I Retrieved latest `transaction_date` per plan
+-I Calculated the number of inactive days using `DATEDIFF`
+-I Filtered those with more than 365 days of inactivity
 
 ---
 
@@ -49,11 +49,11 @@ This repository contains SQL scripts details I developed to answer a set of anal
 **Goal**: Estimate customer CLV based on transaction history and account tenure.
 
 **Approach**:
-- Used `date_joined` from `users_customuser` to calculate tenure in months
-- Counted `confirmed_amount` transactions from `savings_savingsaccount`
-- Assumed profit = 0.1% of transaction amount
-- Applied formula: `CLV = (Total Confirmed Amount / Tenure) * 0.001 * 12`
-- Ranked customers by estimated CLV
+-I Used `date_joined` from `users_customuser` to calculate tenure in months
+-I Counted `confirmed_amount` transactions from `savings_savingsaccount`
+-I Assumed profit = 0.1% of transaction amount
+-I Applied formula: `CLV = (Total Confirmed Amount / Tenure) * 0.001 * 12`
+-I Ranked customers by estimated CLV
 
 ---
 
